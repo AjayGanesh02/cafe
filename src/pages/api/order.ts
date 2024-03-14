@@ -80,6 +80,6 @@ export default async function handler(
   const playlist = (await getPlaylistInfo(playlist_id, access_token)).data;
   await new Promise((r) => setTimeout(r, 10));
   const song = getRandomSong(playlist);
-  void addSongToQueue(song, access_token);
+  await addSongToQueue(song, access_token);
   res.status(200).json({ song: song });
 }
