@@ -2,7 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import queryString from "query-string";
-import { time } from "console";
 
 const SPOTIFY_API_BASE = "https://api.spotify.com/v1";
 
@@ -79,8 +78,8 @@ export default async function handler(
   const order = "matcha";
   const playlist_id = order_to_playlist[order];
   const playlist = (await getPlaylistInfo(playlist_id, access_token)).data;
-  await new Promise((r) => setTimeout(r, 100));
+  await new Promise((r) => setTimeout(r, 10));
   const song = getRandomSong(playlist);
   void addSongToQueue(song, access_token);
-  res.status(200).json({ access_token: access_token });
+  res.status(200).json({ song: song });
 }
