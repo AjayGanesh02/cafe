@@ -5,7 +5,7 @@ import queryString from "query-string";
 
 const SPOTIFY_API_BASE = "https://api.spotify.com/v1";
 
-const order_to_playlist = {
+const order_to_playlist: any = {
   affogato: "1osg6NCTeplpaxAtFBZC3N",
   matcha: "71cq6hQ3JJQhqc4ktTk1rQ",
   latte: "6WnmsstQSgsCEYv4KTQwJU",
@@ -74,12 +74,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const access_token = await getAccessToken();
-
-  const order = "matcha";
+  const data: { drinkChoice: string } = req.body;
+  const order = data.drinkChoice;
   const playlist_id = order_to_playlist[order];
   const playlist = (await getPlaylistInfo(playlist_id, access_token)).data;
-  await new Promise((r) => setTimeout(r, 10));
   const song = getRandomSong(playlist);
   await addSongToQueue(song, access_token);
-  res.status(200).json({ song: song });
+  res.status(200).json({ message: "success" });
 }
