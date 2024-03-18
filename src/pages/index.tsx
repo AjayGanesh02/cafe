@@ -14,48 +14,58 @@ export default function Home() {
   }
 
   return (
-    <main>
+    <main className="flex items-center justify-center">
       <form onSubmit={onSubmit}>
         <div>
+          <div>
+            <input
+              type="radio"
+              id="espresso"
+              name="drinkChoice"
+              value="espresso"
+            />
+            <label htmlFor="espresso">Espresso</label>
+          </div>
+          <div>
+            <input type="radio" id="latte" name="drinkChoice" value="latte" />
+            <label htmlFor="latte">Cafe Latte</label>
+          </div>
+          <div>
+            <input type="radio" id="mocha" name="drinkChoice" value="mocha" />
+            <label htmlFor="mocha">Cafe Mocha</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="americano"
+              name="drinkChoice"
+              value="americano"
+            />
+            <label htmlFor="americano">Americano</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              id="affogato"
+              name="drinkChoice"
+              value="affogato"
+            />
+            <label htmlFor="affogato">Affogato</label>
+          </div>
+          <div>
+            <input type="radio" id="matcha" name="drinkChoice" value="matcha" />
+            <label htmlFor="matcha">Matcha Latte</label>
+          </div>
+        </div>
+        <div>
+          <label htmlFor="name">Your Name:</label>
           <input
-            type="radio"
-            id="espresso"
-            name="drinkChoice"
-            value="espresso"
+            type="text"
+            id="name"
+            name="name"
+            className="rounded-md border border-black"
           />
-          <label htmlFor="espresso">Espresso</label>
         </div>
-        <div>
-          <input type="radio" id="latte" name="drinkChoice" value="latte" />
-          <label htmlFor="latte">Cafe Latte</label>
-        </div>
-        <div>
-          <input type="radio" id="mocha" name="drinkChoice" value="mocha" />
-          <label htmlFor="mocha">Cafe Mocha</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="americano"
-            name="drinkChoice"
-            value="americano"
-          />
-          <label htmlFor="americano">Americano</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            id="affogato"
-            name="drinkChoice"
-            value="affogato"
-          />
-          <label htmlFor="affogato">Affogato</label>
-        </div>
-        <div>
-          <input type="radio" id="matcha" name="drinkChoice" value="matcha" />
-          <label htmlFor="matcha">Matcha Latte</label>
-        </div>
-
         <input type="submit" />
       </form>
     </main>
