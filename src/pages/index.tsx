@@ -27,7 +27,7 @@ export default function Home() {
         <h1>Your order has been submitted!</h1>
       ) : (
         <form onSubmit={onSubmit} className="flex flex-col">
-          <div className="grid grid-cols-2">
+          <div className="mx-10 grid grid-cols-2 py-8">
             <label htmlFor="drinkChoice">Drink Choice:</label>
             <div>
               <div>
@@ -93,7 +93,9 @@ export default function Home() {
               className="rounded-md border border-black"
             />
           </div>
-          <input type="submit" />
+          <div className="flex items-center justify-center rounded-md border">
+            <input type="submit" />
+          </div>
         </form>
       )}
     </main>
