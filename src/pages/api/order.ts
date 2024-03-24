@@ -27,7 +27,7 @@ async function getAccessToken(): Promise<string> {
     headers: {
       "content-type": "application/x-www-form-urlencoded",
       Authorization: `Basic ${Buffer.from(
-        `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
+        `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
       ).toString("base64")}`,
     },
   });
@@ -38,7 +38,7 @@ async function getAccessToken(): Promise<string> {
 
 async function getPlaylistInfo(
   playlist_id: string,
-  access_token: string
+  access_token: string,
 ): Promise<any> {
   const resp = await axios({
     method: "get",
@@ -71,14 +71,22 @@ async function addSongToQueue(song: any, access_token: string) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   const access_token = await getAccessToken();
-  const data: { drinkChoice: string } = req.body;
+  const data = req.body;
   const order = data.drinkChoice;
   const playlist_id = order_to_playlist[order];
   const playlist = (await getPlaylistInfo(playlist_id, access_token)).data;
   const song = getRandomSong(playlist);
   await addSongToQueue(song, access_token);
+  const to_send = `"${JSON.stringify({ order: data, song: song.track.name })}"`;
+  const resp = await axios({
+    method: "POST",
+    url: process.env.DISCORD_WEBHOOK_URL,
+    data: {
+      content: to_send,
+    },
+  });
   res.status(200).json({ message: "success" });
 }
